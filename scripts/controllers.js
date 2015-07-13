@@ -1,18 +1,23 @@
 app.controller("StartCtrl", function($rootScope, $scope, $location, $window) {
 
-  $rootScope.howmany = 20;
+  $rootScope.howmany = 50;
   $rootScope.time = {
     hours: 0,
-    minutes: 3,
+    minutes: 5,
     seconds: 0
   };
 
   $scope.start = function() {
+    $rootScope.started = true;
     $location.path("/countdown");
   };
 });
 
-app.controller("CountdownCtrl", function($scope, CountdownService) {
+app.controller("CountdownCtrl", function($rootScope, $scope, $location, CountdownService) {
+  if (!$rootScope.started) {
+    $location.path("/start");
+  }
+
   CountdownService.start();
   var howmany = 0;
   times = [{howmany: 0, time: 0}];
@@ -21,8 +26,11 @@ app.controller("CountdownCtrl", function($scope, CountdownService) {
   
   $scope.ten = function() {
     howmany += 10;
-    times.push({howmany : howmany, time: CountdownService.elapsed.time});
+    times.push({howmany : howmany, time: CountdownService.elapsed.time}); // we are pushing anyway
 
+    if (howmany >= $rootScope.howmany) {
+      CountdownService.stop();
+    }
   };
 
   $scope.$watch(function() {
