@@ -15,13 +15,23 @@ app.controller("StartCtrl", function($rootScope, $scope, $location, $window) {
 app.controller("CountdownCtrl", function($scope, CountdownService) {
   CountdownService.start();
   var howmany = 0;
-  $scope.times = [];
+  times = [{howmany: 0, time: 0}];
 
   $scope.elapsed = CountdownService.elapsed; // need to pass object (because primitive types are copied)
   
   $scope.ten = function() {
     howmany += 10;
-    $scope.times.push({howmany : howmany, time: CountdownService.elapsed.time});
+    times.push({howmany : howmany, time: CountdownService.elapsed.time});
 
   };
+
+  $scope.$watch(function() {
+    return times;
+  }, function() {
+    console.log(times);
+    $scope.times = [];
+    for (var i=1; i<times.length; i++) { // zaczynamy od pierwszego
+      $scope.times.push(times[i].time - times[i-1].time);
+    }
+  }, true);
 });

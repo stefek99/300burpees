@@ -1,5 +1,5 @@
-{{ elapsed.time | time }}
+{{ elapsed.time | date: 'HH:mm:ss:sss' }}
 
 <button ng-click="ten()" class="ten">+10</button>
 
-<div ng-repeat="time in times">{{ time }}</div>
+<div ng-repeat="time in times track by $index"><span class="count">{{ ($index + 1) * 10 }}</span> : {{ time | date:'mm:ss'}}</div>
