@@ -11,7 +11,7 @@ app.config(function ($routeProvider, $locationProvider) {
       controller: 'CountdownCtrl',
     })           
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/start'
     });
 });
 
@@ -56,47 +56,3 @@ app.filter('time', [function(){
     return newTime;
   };
 }]);
-
-app.controller("StartCtrl", function($rootScope, $scope, $location, $window) {
-
-  $rootScope.howmany = 20;
-  $rootScope.time = {
-    hours: 0,
-    minutes: 3,
-    seconds: 0
-  };
-
-  $scope.start = function() {
-    $location.path("/countdown");
-  };
-});
-
-app.controller("CountdownCtrl", function($scope, CountdownService) {
-  CountdownService.start();
-
-  $scope.elapsed = CountdownService.elapsed;
-
-  $scope.ten = function() {
-
-  };
-});
-
-app.service("CountdownService", function($interval) {
-  var startTimestamp;
-  var elapsed = {
-    time : 0
-  };
-
-  var start = function() {
-    startTimestamp = new Date().getTime();
-    $interval(function() {
-      var now = new Date().getTime();
-      elapsed.time = now - startTimestamp;
-    }, 51); // some funny number so it looks nice
-  };
-
-  return {
-    start: start,
-    elapsed : elapsed
-  };
-});
