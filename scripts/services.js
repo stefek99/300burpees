@@ -1,6 +1,6 @@
 app.service("CountdownService", function($interval) {
   var startTimestamp;
-  var elapsed = { // we are using object to avoid primitive objects that are copied
+  var elapsed = { // we are using object to avoid primitive types that are copied
     time : 0
   };
   var interval;
@@ -14,7 +14,7 @@ app.service("CountdownService", function($interval) {
   };
 
   var stop = function() {
-    $interval.cancel(interval);
+    $interval.cancel(interval); // TODO: for some reason it doesn't work
   };
 
   return {

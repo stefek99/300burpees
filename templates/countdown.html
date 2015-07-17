@@ -1,8 +1,16 @@
-{{ elapsed.time | date: 'mm:ss:sss' }}
+<div class="time">
+  <span ng-if="finalTime">{{ finalTime | date: 'mm:ss:sss'}}</span>
+  <span ng-if="!finalTime">{{ elapsed.time | date: 'mm:ss:sss' }}</span>
+</div>
 
 <button ng-click="ten()" class="ten">+10</button>
 
 <br>
 <br>
 
-<div ng-repeat="time in times track by $index"><span class="count">{{ ($index + 1) * 10 }}</span> : {{ time | date:'mm:ss'}}</div>
+<div ng-repeat="time in times track by $index">
+  <span class="count">{{ ($index + 1) * 10 }}</span> &nbsp;&nbsp;&nbsp;
+  {{ time.current | date:'mm:ss'}} &nbsp;&nbsp;&nbsp;
+<!--   <span class="ok" ng-class="{'bad' : time.plusTooSlow}">{{ time.plusTooSlow ? '+' : '-' }}{{ time.difference | date:'mm:ss'}}</span> -->
+
+</div>

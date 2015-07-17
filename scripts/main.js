@@ -14,3 +14,12 @@ app.config(function ($routeProvider, $locationProvider) {
       redirectTo: '/start'
     });
 });
+
+app.run(function($rootScope) {
+  $rootScope.time = {
+    hours: 0,
+    minutes: 10,
+    seconds: 0,
+    howmany: 100
+  };
+});

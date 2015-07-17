@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js'></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+      var app = angular.module("app", []);
+
+      app.controller('ctrl', function ($scope, $interval) {
+
+
+
+        var interval;
+        $scope.counter = 0;
+      
+
+        $scope.start = function() {
+          interval = $interval(function() {
+              $scope.counter++;
+          }, 100);
+        };        
+
+        $scope.cancel = function() {
+          $interval.cancel(interval);
+        };
+
+      });
+    </script>
+  </head>
+  <body ng-app="app">
+
+    <div ng-controller="ctrl">
+
+      {{ counter }}
+
+      <button ng-click="start()">start</button>
+      <button ng-click="cancel()">cancel</button>
+
+    </div>
+
+  </body>
+</html>
