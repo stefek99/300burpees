@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js'></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+      var app = angular.module("app", []);
+
+      app.controller('ctrl', function ($scope, $interval, myinterval) {
+      
+        $scope.elapsed = myinterval.elapsed;
+
+        $scope.start = function() {
+          myinterval.start();
+        };        
+
+        $scope.cancel = function() {
+          myinterval.cancel();
+        }; 
+
+      });
+
+      app.service("myinterval", function($interval) {
+        var startTimestamp;
+        var elapsed = { // we are using object to avoid primitive types that are copied
+          time : 0
+        };
+        var interval;
+
+        var start = function() {
+          startTimestamp = new Date().getTime();
+          interval = $interval(function() {
+            var now = new Date().getTime();
+            elapsed.time = now - startTimestamp;
+          }, 51); // some funny number so it looks nice
+        };
+
+        var cancel = function() {
+          $interval.cancel(interval); // TODO: for some reason it doesn't work
+        };
+
+        return {
+          start: start,
+          cancel: cancel,
+          elapsed : elapsed
+        };
+      });
+    </script>
+  </head>
+  <body ng-app="app">
+
+    <div ng-controller="ctrl">
+
+      {{ elapsed.time }}
+
+      <button ng-click="start()">start</button>
+      <button ng-click="cancel()">cancel</button>
+
+    </div>
+
+  </body>
+</html>
