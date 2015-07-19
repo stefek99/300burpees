@@ -8,9 +8,10 @@
 <br>
 <br>
 
-<div ng-repeat="time in times track by $index">
-  <span class="count">{{ ($index + 1) * 10 }}</span> &nbsp;&nbsp;&nbsp;
-  {{ time.current | date:'mm:ss'}} &nbsp;&nbsp;&nbsp;
+<div ng-repeat="entry in times track by $index">
+  <span class="count">{{ entry.howmany }}</span>
+  <span class="stage">{{ entry.stage }}</span>
+  <span class="cumulative">{{ entry.cumulative }}</span>
 <!--   <span class="ok" ng-class="{'bad' : time.plusTooSlow}">{{ time.plusTooSlow ? '+' : '-' }}{{ time.difference | date:'mm:ss'}}</span> -->
 
 </div>

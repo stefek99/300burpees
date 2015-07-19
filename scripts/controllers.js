@@ -28,21 +28,29 @@ app.controller("CountdownCtrl", function($rootScope, $scope, $location, Countdow
   }
 
 
+  var howmany = 0;
+  $scope.ten = function() {
 
-  // $scope.ten = function() {
-  //   howmany += 10;
+    var _pushInfo = function() {
+      $scope.times[index].stage = (index === 0) ? CountdownService.elapsed.time : (CountdownService.elapsed.time - $scope.times[index-1].cumulative);
+      $scope.times[index].cumulative = (index === 0) ? 0 : CountdownService.elapsed.time;
+    };
+
+    var index = howmany / 10; // convenient shorthand (if we are just starting we will be pushing to the 0 element of the array)
+    howmany += 10;
     
-  //   if (howmany >= $rootScope.time.howmany) { // YEAH! Finish! Hurray!
-  //     if ($scope.finalTime) {
-  //       return;
-  //     }
-  //     CountdownService.stop(); // We also need to display some helpful messages and offer new options etc...
-  //     $scope.finalTime = CountdownService.elapsed.time; // In this place we want primitive object to avoid copying
-  //     times.push({howmany : howmany, time: CountdownService.elapsed.time});
-  //   } else { // Not finish yet, more to go...
-  //     times.push({howmany : howmany, time: CountdownService.elapsed.time});
-  //   }
-  // };
+
+    if (howmany >= $rootScope.time.howmany) { // YEAH! Finish! Hurray!
+      if ($scope.finalTime) {
+        return;
+      }
+      CountdownService.stop(); // We also need to display some helpful messages and offer new options etc...
+      $scope.finalTime = CountdownService.elapsed.time; // In this place we want primitive object to avoid copying
+      _pushInfo();
+    } else { // Not finish yet, more to go...
+      _pushInfo();
+    }
+  };
 
   // $scope.$watch(function() {
   //   return times;
