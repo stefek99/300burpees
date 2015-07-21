@@ -8,10 +8,21 @@
 <br>
 <br>
 
-<div ng-repeat="entry in times track by $index">
-  <span class="count">{{ entry.howmany }}</span>
-  <span class="stage"><div coloured value="entry.stage"></div></span>
-  <span class="cumulative">{{ entry.cumulative }}</span>
-<!--   <span class="ok" ng-class="{'bad' : time.plusTooSlow}">{{ time.plusTooSlow ? '+' : '-' }}{{ time.difference | date:'mm:ss'}}</span> -->
+<table>
+  <tr>
+    <th>Count</th>
+    <th>Stage</th>
+    <th>Total</th>
+    <th>Status</th>
+  </tr>
 
-</div>
+  <tr ng-repeat="entry in times track by $index">
+    <td class="count">{{ entry.howmany }}</td>
+    <td class="stage"><span coloured value="entry.stage"></span></td>
+    <td class="cumulative">{{ entry.cumulative | date:'mm:ss'}}</td>
+    <td class="status" ng-class="{ahead: entry.ahead.sign}">
+      {{ entry.ahead.sign ? "-" : "" }}{{ entry.ahead.sign === false ? "+" : "" }}{{ entry.ahead.difference | date:'mm:ss' }}
+    </td>
+  </tr>
+
+</table>

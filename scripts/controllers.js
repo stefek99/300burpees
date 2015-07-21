@@ -13,9 +13,9 @@ app.controller("CountdownCtrl", function($rootScope, $scope, $location, Countdow
   }
 
   var totalSeconds = ($rootScope.time.hours * 3600) + ($rootScope.time.minutes * 60) + $rootScope.time.seconds;
-  console.log("totalSeconds: " + totalSeconds);
   var secondsForOne = 1000 * totalSeconds / $rootScope.time.howmany;
-  console.log("secondsForOne: " + secondsForOne);
+  // console.log("totalSeconds: " + totalSeconds);
+  // console.log("secondsForOne: " + secondsForOne);
   
   CountdownService.start();
 
@@ -34,6 +34,12 @@ app.controller("CountdownCtrl", function($rootScope, $scope, $location, Countdow
     var _pushInfo = function() {
       $scope.times[index].stage = (index === 0) ? CountdownService.elapsed.time : (CountdownService.elapsed.time - $scope.times[index-1].cumulative);
       $scope.times[index].cumulative = (index === 0) ? 0 : CountdownService.elapsed.time;
+
+      var optimalTimeNow  = howmany * secondsForOne;
+      var aheadSign = CountdownService.elapsed.time - optimalTimeNow < 0;
+      var aheadDifference = Math.abs(CountdownService.elapsed.time - optimalTimeNow);
+
+      $scope.times[index].ahead = { sign : aheadSign, difference : aheadDifference };
     };
 
     var index = howmany / 10; // convenient shorthand (if we are just starting we will be pushing to the 0 element of the array)

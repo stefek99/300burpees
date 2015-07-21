@@ -4,6 +4,6 @@ app.directive("coloured", function() {
       value:"="
     },
 
-    template : "{{ value }}" // TODO: now I should be able to apply some styles
+    template : "{{ value | date:'mm:ss'}}" // TODO: now I should be able to apply some styles
   };
 });
