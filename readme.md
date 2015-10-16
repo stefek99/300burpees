@@ -1,10 +1,10 @@
 ## Current state
 
-[Imgur](http://i.imgur.com/DQecS4Z.png)
-[Imgur](http://i.imgur.com/hXNdhI0.png)
+![Imgur](http://i.imgur.com/DQecS4Z.png)
+![Imgur](http://i.imgur.com/hXNdhI0.png)
 
 ## Mockup
-[Imgur](http://i.imgur.com/Q9IqOfq.png)
+![Imgur](http://i.imgur.com/Q9IqOfq.png)
 
 ## Roadmap
 * Package the thing into Phonegap / Cordova and publish
