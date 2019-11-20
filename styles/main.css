@@ -8,7 +8,7 @@ button {
 }
 
 .jumbo {
-  font-size: 6em;
+  font-size: 4em;
   font-weight: bold;
 }
 
@@ -18,9 +18,13 @@ button {
 }
 
 .count, .stage, .cumulative, .diff, .par {
-  width: 100px;
   text-align: right;
   display: inline-block;
+  width: 68px;
+}
+
+.count {
+  width: 30px;
 }
 
 .diff {

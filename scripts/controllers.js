@@ -13,7 +13,7 @@ app.controller("CountdownCtrl", function($rootScope, $scope, $location, Countdow
     $location.path("/start");
   }
 
-  CountdownService.start();
+  CountdownService.start($rootScope.settings.minutes, $rootScope.settings.seconds);
 
   var totalSeconds = ($rootScope.settings.hours * 3600) + ($rootScope.settings.minutes * 60) + $rootScope.settings.seconds;
   var secondsForOne = 1000 * totalSeconds / $rootScope.settings.howmany;

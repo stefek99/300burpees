@@ -3,10 +3,10 @@
 
 <br>
 
-<label>hours: <input type="range" min=0 max=5 ng-model="settings.hours"></label><br>
+<!-- <label>hours: <input type="range" min=0 max=5 ng-model="settings.hours"></label><br> -->
 <label>minutes: <input type="range" min=0 max=59 ng-model="settings.minutes"></label><br>
 <label>seconds: <input type="range" min=0 max=59 ng-model="settings.seconds"></label><br>
 
-<h1>{{ settings.hours | pad : 2 }}:{{ settings.minutes | pad : 2 }}:{{ settings.seconds | pad : 2 }}</h1>
+<h1><!-- {{ settings.hours | pad : 2 }}: --> {{ settings.minutes | pad : 2 }}:{{ settings.seconds | pad : 2 }}</h1>
 
 <button ng-click="start()">Start</button>
