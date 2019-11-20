@@ -7,8 +7,14 @@ button {
   padding: 5px;
 }
 
-.time {
+.jumbo {
+  font-size: 6em;
+  font-weight: bold;
+}
+
+.big {
   font-size: 2em;
+  font-weight: bold;
 }
 
 .count, .stage, .cumulative, .status {
@@ -17,7 +23,7 @@ button {
   display: inline-block;
 }
 
-.status {
+.status.behind {
   color: red;
 }
 

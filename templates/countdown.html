@@ -1,9 +1,12 @@
-<div class="time">
-  <span ng-if="finalTime">{{ finalTime | date: 'mm:ss:sss'}}</span>
-  <span ng-if="!finalTime">{{ elapsed.time | date: 'mm:ss:sss' }}</span>
-</div>
+<div class="jumbo" ng-if="finalTime">{{ finalTime | date: 'mm:ss:sss'}}</div>
+<div class="jumbo">{{ howmany }} / {{ settings.howmany }}</div>
 
+<button ng-click="one()" class="ten">+1</button>
 <button ng-click="ten()" class="ten">+10</button>
+
+<div class="big">
+  {{ elapsed.time | date: 'mm:ss:sss' }} / {{ settings.hours | pad : 2 }}:{{ settings.minutes | pad : 2 }}:{{ settings.seconds | pad : 2 }}
+</div>
 
 <br>
 <br>
@@ -13,16 +16,16 @@
     <th class="count">Count</th>
     <th class="stage">Stage</th>
     <th class="cumulative">Total</th>
-    <!-- <th>Status</th> -->
+    <th class="status">Status</th>
   </tr>
 
   <tr ng-repeat="entry in times track by $index">
     <td class="count">{{ entry.howmany }}&nbsp;</td>
     <td class="stage"><span coloured value="entry.stage"></span>&nbsp;</td>
-    <td class="cumulative">{{ entry.cumulative | date:'mm:ss'}}&nbsp;</td>
-    <!-- <td class="status" ng-class="{ahead: entry.ahead.sign}">
-      {{ entry.ahead.sign ? "-" : "" }}{{ entry.ahead.sign === false ? "+" : "" }}{{ entry.ahead.difference | date:'mm:ss' }}
-    </td> -->
+    <td class="cumulative">{{ entry.cumulative | date:'hh:mm:ss'}}&nbsp;</td>
+    <td class="status" ng-class="{ahead: entry.ahead.sign}">
+      {{ entry.ahead.sign ? "-" : "" }}{{ entry.ahead.sign === false ? "+" : "" }}{{ entry.ahead.difference | date:'hh:mm:ss' }}&nbsp;
+    </td>
   </tr>
 
 </table>

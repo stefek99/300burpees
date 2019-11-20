@@ -16,7 +16,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.run(function($rootScope) {
-  $rootScope.time = {
+  $rootScope.settings = {
     hours: 0,
     minutes: 10,
     seconds: 0,
