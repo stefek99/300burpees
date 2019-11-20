@@ -17,14 +17,18 @@ button {
   font-weight: bold;
 }
 
+td.header {
+  font-weight: bold;
+}
+
 .count, .stage, .cumulative, .diff, .par {
   text-align: right;
   display: inline-block;
-  width: 68px;
+  width: 65px;
 }
 
 .count {
-  width: 30px;
+  width: 35px;
 }
 
 .diff {
