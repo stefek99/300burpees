@@ -10,19 +10,19 @@
 
 <table>
   <tr>
-    <th>Count</th>
-    <th>Stage</th>
-    <th>Total</th>
-    <th>Status</th>
+    <th class="count">Count</th>
+    <th class="stage">Stage</th>
+    <th class="cumulative">Total</th>
+    <!-- <th>Status</th> -->
   </tr>
 
   <tr ng-repeat="entry in times track by $index">
-    <td class="count">{{ entry.howmany }}</td>
-    <td class="stage"><span coloured value="entry.stage"></span></td>
-    <td class="cumulative">{{ entry.cumulative | date:'mm:ss'}}</td>
-    <td class="status" ng-class="{ahead: entry.ahead.sign}">
+    <td class="count">{{ entry.howmany }}&nbsp;</td>
+    <td class="stage"><span coloured value="entry.stage"></span>&nbsp;</td>
+    <td class="cumulative">{{ entry.cumulative | date:'mm:ss'}}&nbsp;</td>
+    <!-- <td class="status" ng-class="{ahead: entry.ahead.sign}">
       {{ entry.ahead.sign ? "-" : "" }}{{ entry.ahead.sign === false ? "+" : "" }}{{ entry.ahead.difference | date:'mm:ss' }}
-    </td>
+    </td> -->
   </tr>
 
 </table>
