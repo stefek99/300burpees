@@ -17,17 +17,21 @@ button {
   font-weight: bold;
 }
 
-.count, .stage, .cumulative, .status {
-  width: 70px;
+.count, .stage, .cumulative, .diff, .par {
+  width: 100px;
   text-align: right;
   display: inline-block;
 }
 
-.status.behind {
+.diff {
   color: red;
 }
 
-.status.ahead {
+.diff.neutral {
+  color: black;
+}
+
+.diff.ahead {
   color: green;
 }
 

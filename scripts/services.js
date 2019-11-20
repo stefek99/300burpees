@@ -10,6 +10,8 @@ app.service("CountdownService", function($interval) {
     interval = $interval(function() {
       var now = new Date().getTime();
       elapsed.time = now - startTimestamp;
+
+      console.log(elapsed.time);
     }, 51); // some funny number so it looks nice
   };
 

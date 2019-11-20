@@ -13,23 +13,16 @@ app.controller("CountdownCtrl", function($rootScope, $scope, $location, Countdow
     $location.path("/start");
   }
 
-  var totalSeconds = ($rootScope.settings.hours * 3600) + ($rootScope.settings.minutes * 60) + $rootScope.settings.seconds;
-  var secondsForOne = 1000 * totalSeconds / $rootScope.settings.howmany;
-  // console.log("totalSeconds: " + totalSeconds);
-  // console.log("secondsForOne: " + secondsForOne);
-  
   CountdownService.start();
 
-  $scope.times = [];
-  $scope.elapsed = CountdownService.elapsed; // need to pass object (because primitive types are copied)
-
-
-  // for (var i=10; i<=$rootScope.settings.howmany; i+=10) {
-  //   $scope.times.push({ "howmany" : i});
-  // }
+  var totalSeconds = ($rootScope.settings.hours * 3600) + ($rootScope.settings.minutes * 60) + $rootScope.settings.seconds;
+  var secondsForOne = 1000 * totalSeconds / $rootScope.settings.howmany;
 
   $scope.howmany = 0; // how many we did so far
-
+  $scope.times = [];
+  $scope.elapsed = CountdownService.elapsed; // need to pass object (because primitive types are copied)
+ 
+  // if we press "one" many times it will call "ten" internally
   $scope.one = function() {
     $scope.howmany++;
     if ($scope.howmany % 10 === 0) { // HACK HACK HACK - once we do 10 this way, we resolve to known and tested function
@@ -50,22 +43,15 @@ app.controller("CountdownCtrl", function($rootScope, $scope, $location, Countdow
   };
 
   var _pushInfo = function() {
-    var index = Math.floor($scope.howmany / 10); // convenient shorthand (if we are just starting we will be pushing to the 0 element of the array)
-    
     var data = {
-      howmany: index * 10,
+      howmany: $scope.howmany,
       cumulative: CountdownService.elapsed.time
     }
 
-
-    // $scope.times[index].stage = (index === 0) ? CountdownService.elapsed.time : (CountdownService.elapsed.time - $scope.times[index-1].cumulative);
-    // $scope.times[index].cumulative = CountdownService.elapsed.time;
-
-    // var optimalTimeNow  = $scope.howmany * secondsForOne;
-    // var aheadSign = CountdownService.elapsed.time - optimalTimeNow < 0;
-    // var aheadDifference = Math.abs(CountdownService.elapsed.time - optimalTimeNow);
-
-    // $scope.times[index].ahead = { sign : aheadSign, difference : aheadDifference };
+    data.stage = $scope.times.length === 0 ? CountdownService.elapsed.time : CountdownService.elapsed.time - $scope.times[0].cumulative
+    data.par   = $scope.howmany * secondsForOne;
+    data.ahead = CountdownService.elapsed.time < data.par;
+    data.diff  = Math.abs(CountdownService.elapsed.time - data.par);
 
     $scope.times.unshift(data);
   };
