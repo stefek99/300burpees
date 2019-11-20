@@ -1,11 +1,11 @@
-<div class="jumbo" ng-if="finalTime">{{ finalTime | date: 'mm:ss:sss'}}</div>
+<div class="jumbo" ng-if="finalTime">{{ finalTime | date: 'hh:mm:ss:sss'}}</div>
 <div class="jumbo">{{ howmany }} / {{ settings.howmany }}</div>
 
-<button ng-click="one()" class="ten">+1</button>
-<button ng-click="ten()" class="ten">+10</button>
+<button ng-click="one()" class="ten" ng-disabled="elapsed.time > settings.time">+1</button>
+<button ng-click="ten()" class="ten" ng-disabled="elapsed.time > settings.time">+10</button>
 
 <div class="big">
-  {{ elapsed.time | date: 'mm:ss:sss' }} / {{ settings.hours | pad : 2 }}:{{ settings.minutes | pad : 2 }}:{{ settings.seconds | pad : 2 }}
+  <span ng-show="elapsed.time < settings.time">{{ elapsed.time | date: 'hh:mm:ss:sss' }} /</span>{{ settings.hours | pad : 2 }}:{{ settings.minutes | pad : 2 }}:{{ settings.seconds | pad : 2 }}
 </div>
 
 <br>
@@ -27,5 +27,7 @@
       {{ entry.ahead.sign ? "-" : "" }}{{ entry.ahead.sign === false ? "+" : "" }}{{ entry.ahead.difference | date:'hh:mm:ss' }}&nbsp;
     </td>
   </tr>
-
 </table>
+
+
+<a href="" ng-click="restart()">restart</a>
