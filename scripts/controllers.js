@@ -29,6 +29,12 @@ app.controller("CountdownCtrl", function($rootScope, $scope, $location, Countdow
       $scope.howmany -= 10;
       $scope.ten();
     }
+
+    if ($scope.howmany >= $rootScope.settings.howmany) {
+      setTimeout(function(){
+        alert("DONE");
+      });
+    }
   }
 
   $scope.ten = function() {
@@ -39,6 +45,12 @@ app.controller("CountdownCtrl", function($rootScope, $scope, $location, Countdow
       _pushInfo();
     } else { // Not finish yet, more to go...
       _pushInfo();
+    }
+
+    if ($scope.howmany >= $rootScope.settings.howmany) {
+      setTimeout(function(){
+        alert("DONE");
+      });
     }
   };
 
